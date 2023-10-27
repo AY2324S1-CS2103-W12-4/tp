@@ -19,7 +19,7 @@ public class SampleDataUtilTest {
     public void getSampleUser_validData_success() {
         Person user = SampleDataUtil.getSampleUser();
         assertEquals("Me", user.getName().fullName);
-        assertEquals(1, user.getFreeTimes().size());
+        assertEquals(1, user.getTimeblocks().size());
         assertEquals(1, user.getTags().size());
     }
 
@@ -28,7 +28,7 @@ public class SampleDataUtilTest {
         ReadOnlyUserData userData = SampleDataUtil.getSampleUserData();
         Person user = userData.getUser();
         assertEquals("Me", user.getName().fullName);
-        assertEquals(1, user.getFreeTimes().size());
+        assertEquals(1, user.getTimeblocks().size());
         assertEquals(1, user.getTags().size());
     }
 
@@ -41,7 +41,7 @@ public class SampleDataUtilTest {
     @Test
     public void getFreeTimeSet_validData_success() {
         String[] freeTimes = { "Monday 1200 1300", "Tuesday 1200 1300", "Wednesday 1000 1100" };
-        assertEquals(3, SampleDataUtil.getFreeTimeSet(freeTimes).size());
+        assertEquals(3, SampleDataUtil.getTimeBlockSet(freeTimes).size());
     }
 
     @Test

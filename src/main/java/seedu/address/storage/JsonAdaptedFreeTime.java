@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.timetable.FreeTime;
+import seedu.address.model.person.timetable.TimeBlock;
 
 /**
  * Jackson-friendly version of {@link FreeTime}.
@@ -24,8 +25,8 @@ public class JsonAdaptedFreeTime {
     /**
      * Converts a given {@code FreeTime} into this class for Jackson use.
      */
-    public JsonAdaptedFreeTime(FreeTime source) {
-        freeTime = source.freeTimeString;
+    public JsonAdaptedFreeTime(TimeBlock source) {
+        freeTime = source.timeBlockString;
     }
 
     @JsonValue
@@ -38,10 +39,10 @@ public class JsonAdaptedFreeTime {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted freeTime.
      */
-    public FreeTime toModelType() throws IllegalValueException {
+    public TimeBlock toModelType() throws IllegalValueException {
         if (!FreeTime.isValidFreeTime(freeTime)) {
             throw new IllegalValueException(FreeTime.MESSAGE_CONSTRAINTS);
         }
-        return new FreeTime(freeTime);
+        return new TimeBlock(freeTime);
     }
 }

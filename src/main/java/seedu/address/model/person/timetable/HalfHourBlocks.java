@@ -42,6 +42,17 @@ public class HalfHourBlocks implements Comparable<HalfHourBlocks> {
     }
 
     /**
+     * Adds a new time to the timetable.
+     * @param startBlock The starting half-hour block (inclusive).
+     * @param endBlock The ending half-hour block (exclusive).
+     */
+    public void addTime(int startBlock, int endBlock) {
+        for (int i = startBlock; i < endBlock; i++) {
+            blocks[i] = true;
+        }
+    }
+
+    /**
      * Returns a new HalfHourBlocks representing the overlap between the current and another HalfHourBlocks.
      *
      * @param other The other HalfHourBlocks to check against.

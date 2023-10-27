@@ -22,6 +22,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.timetable.FreeTime;
+import seedu.address.model.person.timetable.TimeBlock;
 import seedu.address.model.tag.Tag;
 
 
@@ -86,7 +87,7 @@ public class EditUserCommand extends Command {
         Phone updatedPhone = editUserDescriptor.getPhone().orElse(userToEdit.getPhone());
         Email updatedEmail = editUserDescriptor.getEmail().orElse(userToEdit.getEmail());
         Address updatedAddress = editUserDescriptor.getAddress().orElse(userToEdit.getAddress());
-        Set<FreeTime> updatedFreeTimes = editUserDescriptor.getFreeTimes().orElse(userToEdit.getFreeTimes());
+        Set<TimeBlock> updatedFreeTimes = editUserDescriptor.getTimeBlocks().orElse(userToEdit.getTimeblocks());
         Set<Tag> updatedTags = editUserDescriptor.getTags().orElse(userToEdit.getTags());
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedFreeTimes, updatedTags);
     }

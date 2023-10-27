@@ -38,9 +38,23 @@ public class TimeBlock implements Comparable<TimeBlock> {
         int endBlock = Integer.parseInt(parts[2]) / 100 * 2 + (Integer.parseInt(parts[2]) % 100) / 30;
         this.timeBlocks = new HalfHourBlocks(startBlock, endBlock);
 
-        //Capitalize the first letter of the day
+        //Capitalize the first letter of the day      
         String formattedDay = parts[0].substring(0, 1).toUpperCase() + parts[0].substring(1).toLowerCase();
         this.timeBlockString = formattedDay + " " + parts[1] + " " + parts[2];
+    }
+
+    /**
+     * Adds a new time to the timetable.
+     * @param timeBlockString The string representation of the time block to add.
+     */
+    public void addTime(String timeBlockString) {
+        requireNonNull(timeBlockString);
+        checkArgument(isValidTimeBlock(timeBlockString), MESSAGE_CONSTRAINTS);
+
+        String[] parts = timeBlockString.split(" ");
+        int startBlock = Integer.parseInt(parts[1]) / 100 * 2 + (Integer.parseInt(parts[1]) % 100) / 30;
+        int endBlock = Integer.parseInt(parts[2]) / 100 * 2 + (Integer.parseInt(parts[2]) % 100) / 30;
+        this.timeBlocks.addTime(startBlock, endBlock);
     }
 
     /**
@@ -84,6 +98,7 @@ public class TimeBlock implements Comparable<TimeBlock> {
     public int compareByStartTime(TimeBlock other) {
         return this.timeBlocks.compareTo(other.timeBlocks);
     }
+
     /**
      * Checks if the current TimeBlock overlaps with another TimeBlock.
      * If there's an overlap, returns a new TimeBlock representing the overlapping period.

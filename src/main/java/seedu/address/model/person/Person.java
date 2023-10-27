@@ -9,6 +9,8 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.timetable.FreeTime;
+import seedu.address.model.person.timetable.TimeBlock;
+import seedu.address.model.person.timetable.WeeklySchedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,19 +26,19 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<FreeTime> freeTimes = new HashSet<>();
+    private final Set<TimeBlock> timeblocks = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<FreeTime> freeTimes, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<TimeBlock> freeTimes, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, freeTimes, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.freeTimes.addAll(freeTimes);
+        this.timeblocks.addAll(freeTimes);
         this.tags.addAll(tags);
     }
 
@@ -70,10 +72,10 @@ public class Person {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<FreeTime> getFreeTimes() throws NullPointerException {
-        return Collections.unmodifiableSet(freeTimes);
+    public Set<TimeBlock> getTimeblocks() throws NullPointerException {
+        return Collections.unmodifiableSet(timeblocks);
     }
-
+    
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -117,7 +119,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && freeTimes.equals(otherPerson.freeTimes)
+                && timeblocks.equals(otherPerson.timeblocks)
                 && tags.equals(otherPerson.tags);
     }
 
@@ -134,7 +136,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("free times", freeTimes)
+                .add("free times", timeblocks)
                 .add("tags", tags)
                 .toString();
     }

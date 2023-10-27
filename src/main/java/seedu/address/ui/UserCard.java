@@ -42,9 +42,9 @@ public class UserCard extends UiPart<Region> {
         phone.setText(user.getPhone().value);
         address.setText(user.getAddress().value);
         email.setText(user.getEmail().value);
-        user.getFreeTimes().stream()
-                .sorted(Comparator.comparing(freeTime -> freeTime.freeTimeString))
-                .forEach(freeTime -> freeTimes.getChildren().add(new Label(freeTime.freeTimeString)));
+        user.getTimeblocks().stream()
+                .sorted(Comparator.comparing(freeTime -> freeTime.timeBlockString))
+                .forEach(freeTime -> freeTimes.getChildren().add(new Label(freeTime.timeBlockString)));
         user.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

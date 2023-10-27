@@ -10,7 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.timetable.FreeTime;
+import seedu.address.model.person.timetable.TimeBlock;
 
 /**
  * Represents a command that finds all contacts with the same free time as the User.
@@ -54,18 +54,18 @@ public class CommonFreetimeCommand extends Command {
         ArrayList<Person> overlappingContacts = new ArrayList<>();
 
         // If user has no free time, return error message
-        if (model.getUser().getFreeTimes().isEmpty()) {
+        if (model.getUser().getTimeblocks().isEmpty()) {
             throw new CommandException(MESSAGE_NO_FREE_TIME);
         }
         // If no name is specified, return the user's common free time with all contacts
         if (this.name == null) {
-            Set<FreeTime> userFreeTime = model.getUser().getFreeTimes();
+            Set<TimeBlock> userFreeTime = model.getUser().getTimeblocks();
             ObservableList<Person> contacts = model.getAddressBook().getPersonList();
-            ArrayList<FreeTime> commonFreeTime = new ArrayList<>();
+            ArrayList<TimeBlock> commonFreeTime = new ArrayList<>();
             for (Person contact : contacts) {
-                Set<FreeTime> contactFreeTime = contact.getFreeTimes();
-                for (FreeTime userTime : userFreeTime) {
-                    for (FreeTime contactTime : contactFreeTime) {
+                Set<TimeBlock> contactFreeTime = contact.getTimeblocks();
+                for (TimeBlock userTime : userFreeTime) {
+                    for (TimeBlock contactTime : contactFreeTime) {
                         if (userTime.isOverlap(contactTime)) {
                             commonFreeTime.add(userTime.overlap(contactTime));
                             overlappingContacts.add(contact);
@@ -81,7 +81,7 @@ public class CommonFreetimeCommand extends Command {
                 for (Person contact : overlappingContacts) {
                     Name nameOfContact = contact.getName();
                     sb.append(nameOfContact).append(" is free at ");
-                    FreeTime freeTime = commonFreeTime.get(i);
+                    TimeBlock freeTime = commonFreeTime.get(i);
                     sb.append(freeTime.toString()).append("\n");
                     i++;
                 }
@@ -89,11 +89,11 @@ public class CommonFreetimeCommand extends Command {
             }
         } else {
             Person friend = model.getPersonWithName(this.name);
-            Set<FreeTime> userFreeTime = model.getUser().getFreeTimes();
-            Set<FreeTime> friendFreeTime = friend.getFreeTimes();
-            Set<FreeTime> commonFreeTime = new HashSet<>();
-            for (FreeTime userTime : userFreeTime) {
-                for (FreeTime friendTime : friendFreeTime) {
+            Set<TimeBlock> userFreeTime = model.getUser().getTimeblocks();
+            Set<TimeBlock> friendFreeTime = friend.getTimeblocks();
+            Set<TimeBlock> commonFreeTime = new HashSet<>();
+            for (TimeBlock userTime : userFreeTime) {
+                for (TimeBlock friendTime : friendFreeTime) {
                     if (userTime.isOverlap(friendTime)) {
                         commonFreeTime.add(userTime.overlap(friendTime));
                     }
@@ -103,7 +103,7 @@ public class CommonFreetimeCommand extends Command {
                 throw new CommandException(createNoOverlapFriendMessage(friend));
             } else {
                 StringBuilder sb = new StringBuilder(MESSAGE_COMMON_FREETIME_SUCCESS);
-                for (FreeTime freeTime : commonFreeTime) {
+                for (TimeBlock freeTime : commonFreeTime) {
                     sb.append(friend.getName().toString()).append(" is free at ")
                             .append(freeTime.toString()).append("\n");
                 }
