@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FREETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEBLOCK;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.edit.EditUserCommand;
 import seedu.address.logic.commands.edit.EditUserDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.timetable.FreeTime;
+import seedu.address.model.person.timetable.TimeBlock;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -56,7 +58,7 @@ public class EditUserCommandParser implements Parser<EditUserCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        parseFreeTimesForEdit(argMultimap.getAllValues(PREFIX_FREETIME)).ifPresent(editPersonDescriptor::setFreeTimes);
+        parseTimeBlocksForEdit(argMultimap.getAllValues(PREFIX_TIMEBLOCK)).ifPresent(editPersonDescriptor::setTimeBlocks);
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (editPersonDescriptor.isAnyFieldEdited()) {
@@ -81,6 +83,23 @@ public class EditUserCommandParser implements Parser<EditUserCommand> {
                 ? Collections.emptySet()
                 : freetimes;
         return Optional.of(ParserUtil.parseFreeTimes(freeTimeSet));
+    }
+
+    /**
+     * Parses {@code Collection<String> freetimes} into a {@code Set<FreeTime>} if {@code freetimes} is non-empty.
+     * If {@code freetimes} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<FreeTime>} containing zero tags.
+     */
+    private Optional<Set<TimeBlock>> parseTimeBlocksForEdit(Collection<String> timeBlocks) throws ParseException {
+        assert timeBlocks != null;
+
+        if (timeBlocks.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> freeTimeSet = timeBlocks.size() == 1 && timeBlocks.contains("")
+                ? Collections.emptySet()
+                : timeBlocks;
+        return Optional.of(ParserUtil.parseTimeBlocks(freeTimeSet));
     }
 
     /**

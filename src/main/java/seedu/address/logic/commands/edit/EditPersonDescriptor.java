@@ -13,6 +13,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.timetable.FreeTime;
+import seedu.address.model.person.timetable.TimeBlock;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,7 +25,7 @@ public class EditPersonDescriptor {
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<FreeTime> freeTimes;
+    private Set<TimeBlock> timeBlocks;
     private Set<Tag> tags;
 
     public EditPersonDescriptor() {}
@@ -38,7 +39,7 @@ public class EditPersonDescriptor {
         setPhone(toCopy.phone);
         setEmail(toCopy.email);
         setAddress(toCopy.address);
-        setFreeTimes(toCopy.freeTimes);
+        setTimeBlocks(toCopy.timeBlocks);
         setTags(toCopy.tags);
     }
 
@@ -46,7 +47,7 @@ public class EditPersonDescriptor {
      * Returns true if at least one field is edited.
      */
     public boolean isAnyFieldEdited() {
-        return !CollectionUtil.isAnyNonNull(name, phone, email, address, freeTimes, tags);
+        return !CollectionUtil.isAnyNonNull(name, phone, email, address, timeBlocks, tags);
     }
 
     public void setName(Name name) {
@@ -102,8 +103,8 @@ public class EditPersonDescriptor {
      * Sets {@code freeTimes} to this object's {@code freeTimes}.
      * A defensive copy of {@code freeTimes} is used internally.
      */
-    public void setFreeTimes(Set<FreeTime> freeTimes) {
-        this.freeTimes = (freeTimes != null) ? new HashSet<>(freeTimes) : null;
+    public void setTimeBlocks(Set<TimeBlock> timeBlocks) {
+        this.timeBlocks = (timeBlocks != null) ? new HashSet<>(timeBlocks) : null;
     }
 
     /**
@@ -111,8 +112,8 @@ public class EditPersonDescriptor {
      * if modification is attempted.
      * Returns {@code Optional#empty()} if {@code freeTimes} is null.
      */
-    public Optional<Set<FreeTime>> getFreeTimes() {
-        return (freeTimes != null) ? Optional.of(Collections.unmodifiableSet(freeTimes)) : Optional.empty();
+    public Optional<Set<TimeBlock>> getTimeBlocks() {
+        return (timeBlocks != null) ? Optional.of(Collections.unmodifiableSet(timeBlocks)) : Optional.empty();
     }
 
     @Override
@@ -131,7 +132,7 @@ public class EditPersonDescriptor {
                 && Objects.equals(phone, otherEditPersonDescriptor.phone)
                 && Objects.equals(email, otherEditPersonDescriptor.email)
                 && Objects.equals(address, otherEditPersonDescriptor.address)
-                && Objects.equals(freeTimes, otherEditPersonDescriptor.freeTimes)
+                && Objects.equals(timeBlocks, otherEditPersonDescriptor.timeBlocks)
                 && Objects.equals(tags, otherEditPersonDescriptor.tags);
     }
 
@@ -142,7 +143,7 @@ public class EditPersonDescriptor {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("free times", freeTimes)
+                .add("free times", timeBlocks)
                 .add("tags", tags)
                 .toString();
     }

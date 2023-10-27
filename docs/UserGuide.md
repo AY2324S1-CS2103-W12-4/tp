@@ -70,6 +70,23 @@ Unsuccessful Command:
 
 Displays an error message. `To list, please run the command ‘list’`
 
+### Display common free times : `cft`
+
+Displays common free times between user and friends or user and their entire addressbook
+depending on the user's input. `cft` without any prefixes will display common free times between user and the entire addressbook, while `cft n/` will display common free times between user and specified friend.
+
+Format: `cft n/[friend name]` or `cft`
+
+Successful Command:
+- Will display the friend(s) with common free times in the following format
+"Bernice Yu is free on [Monday 1200 1230]
+
+Unsuccessful Command:
+
+Displays an error message. `Invalid command format! 
+cft: Finds all contacts with the same free time as the User.
+Example: cft`
+
 
 ### Editing a friend's information : `edit`
 

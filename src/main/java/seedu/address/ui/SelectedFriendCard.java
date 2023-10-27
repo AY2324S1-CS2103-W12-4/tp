@@ -43,9 +43,9 @@ public class SelectedFriendCard extends UiPart<Region> {
         phone.setText(selectedFriend.getPhone().value);
         address.setText(selectedFriend.getAddress().value);
         email.setText(selectedFriend.getEmail().value);
-        selectedFriend.getFreeTimes().stream()
-                .sorted(Comparator.comparing(freeTime -> freeTime.freeTimeString))
-                .forEach(freeTime -> freeTimes.getChildren().add(new Label(freeTime.freeTimeString)));
+        selectedFriend.getTimeblocks().stream()
+                .sorted(Comparator.comparing(freeTime -> freeTime.timeBlockString))
+                .forEach(freeTime -> freeTimes.getChildren().add(new Label(freeTime.timeBlockString)));
         selectedFriend.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

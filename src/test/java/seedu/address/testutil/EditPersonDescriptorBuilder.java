@@ -11,6 +11,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.timetable.FreeTime;
+import seedu.address.model.person.timetable.TimeBlock;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,7 +38,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
-        descriptor.setFreeTimes(person.getFreeTimes());
+        descriptor.setTimeBlocks(person.getTimeblocks());
         descriptor.setTags(person.getTags());
     }
 
@@ -77,9 +78,9 @@ public class EditPersonDescriptorBuilder {
      * Parses the {@code freeTimes} into a {@code Set<FreeTime>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withFreeTimes(String... freeTimes) {
-        Set<FreeTime> freeTimeSet = Stream.of(freeTimes).map(FreeTime::new).collect(Collectors.toSet());
-        descriptor.setFreeTimes(freeTimeSet);
+    public EditPersonDescriptorBuilder withFreeTimes(String... timeBlocks) {
+        Set<TimeBlock> freeTimeSet = Stream.of(timeBlocks).map(TimeBlock::new).collect(Collectors.toSet());
+        descriptor.setTimeBlocks(freeTimeSet);
         return this;
     }
 
