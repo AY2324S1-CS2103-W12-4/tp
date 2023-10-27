@@ -7,14 +7,13 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.UserBuilder;
 
 public class UserDataTest {
     @Test
     public void setUser_newUser() {
-        UserData userData = new UserData(new PersonBuilder().build());
-        assertEquals(userData.getUser(), new PersonBuilder().build());
+        UserData userData = new UserData(new UserBuilder().build());
+        assertEquals(userData.getUser(), new UserBuilder().build());
     }
 
     @Test
@@ -25,26 +24,18 @@ public class UserDataTest {
 
     @Test
     public void resetData_filled() {
-        UserData userData = new UserData(new PersonBuilder().build());
+        UserData userData = new UserData(new UserBuilder().build());
         UserData newUserData = new UserData();
         userData.resetData(newUserData);
         assertEquals(userData, new UserData());
     }
 
     @Test
-    public void getUserView() {
-        UserData userData = new UserData();
-        UniquePersonList userView = new UniquePersonList();
-        userView.add(userData.getUser());
-        assertEquals(userData.getUserView(), userView.asUnmodifiableObservableList());
-    }
-
-    @Test
     public void equals() {
-        UserData userData = new UserData(new PersonBuilder().build());
+        UserData userData = new UserData(new UserBuilder().build());
 
         // same values -> returns true
-        assertTrue(userData.equals(new UserData(new PersonBuilder().build())));
+        assertTrue(userData.equals(new UserData(new UserBuilder().build())));
 
         // same object -> returns true
         assertTrue(userData.equals(userData));
@@ -61,13 +52,13 @@ public class UserDataTest {
 
     @Test
     public void testHashCode() {
-        UserData userData = new UserData(new PersonBuilder().build());
-        assertEquals(userData.hashCode(), new UserData(new PersonBuilder().build()).hashCode());
+        UserData userData = new UserData(new UserBuilder().build());
+        assertEquals(userData.hashCode(), new UserData(new UserBuilder().build()).hashCode());
     }
 
     @Test
     public void testToString() {
-        UserData userData = new UserData(new PersonBuilder().build());
+        UserData userData = new UserData(new UserBuilder().build());
         String expected = "User : " + userData.getUser().toString();
         assertEquals(expected, userData.toString());
     }

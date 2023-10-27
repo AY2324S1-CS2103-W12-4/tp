@@ -16,12 +16,14 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.edit.EditPersonDescriptor;
+import seedu.address.logic.commands.edit.EditUserDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditUserDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -66,12 +68,20 @@ public class CommandTestUtil {
 
     public static final EditPersonDescriptor DESC_AMY;
     public static final EditPersonDescriptor DESC_BOB;
+    public static final EditUserDescriptor DESC_USER_AMY;
+    public static final EditUserDescriptor DESC_USER_BOB;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withFreeTimes(VALID_FREETIME_MONDAY).withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withFreeTimes(VALID_FREETIME_TUESDAY).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_USER_AMY = new EditUserDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withFreeTimes(VALID_FREETIME_MONDAY).withTags(VALID_TAG_FRIEND).build();
+        DESC_USER_BOB = new EditUserDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withFreeTimes(VALID_FREETIME_TUESDAY).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }

@@ -15,8 +15,8 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.logic.commands.edit.EditPersonDescriptor;
 import seedu.address.logic.commands.edit.EditUserCommand;
+import seedu.address.logic.commands.edit.EditUserDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.timetable.FreeTime;
 import seedu.address.model.person.timetable.TimeBlock;
@@ -44,7 +44,7 @@ public class EditUserCommandParser implements Parser<EditUserCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        EditUserDescriptor editPersonDescriptor = new EditUserDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));

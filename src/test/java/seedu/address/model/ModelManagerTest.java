@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
+import seedu.address.model.user.User;
 import seedu.address.model.user.UserData;
 import seedu.address.model.user.UserPrefs;
 import seedu.address.testutil.AddressBookBuilder;
@@ -140,7 +140,7 @@ public class ModelManagerTest {
     public void getUserView() {
         UserData userData = new UserData();
         ModelManager modelManager = new ModelManager();
-        ObservableList<Person> userView = userData.getUserView();
+        ObservableList<User> userView = userData.getUserView();
         modelManager.setUser(userData.getUser());
         assertEquals(modelManager.getUserView(), userView);
     }

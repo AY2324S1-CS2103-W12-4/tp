@@ -15,7 +15,7 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.user.ReadOnlyUserData;
 import seedu.address.model.user.UserData;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.UserBuilder;
 
 public class JsonUserDataStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonUserDataStorageTest");
@@ -70,7 +70,7 @@ public class JsonUserDataStorageTest {
 
     private UserData getTypicalUserData() {
         UserData userData = new UserData();
-        userData.setUser(new PersonBuilder().build());
+        userData.setUser(new UserBuilder().build());
         return userData;
     }
 
@@ -103,7 +103,7 @@ public class JsonUserDataStorageTest {
     @Test
     public void saveData_success() throws DataLoadingException, IOException {
         UserData original = new UserData();
-        original.setUser(new PersonBuilder().build());
+        original.setUser(new UserBuilder().build());
 
         Path dataFilePath = testFolder.resolve("TempData.json");
         JsonUserDataStorage jsonUserDataStorage = new JsonUserDataStorage(dataFilePath);
@@ -112,7 +112,7 @@ public class JsonUserDataStorageTest {
         ReadOnlyUserData readBack = jsonUserDataStorage.readUserData().get();
         assertEquals(original, readBack);
 
-        original.setUser(new PersonBuilder().withName("Bobby").build());
+        original.setUser(new UserBuilder().withName("Bobby").build());
         jsonUserDataStorage.saveUserData(original);
         readBack = jsonUserDataStorage.readUserData().get();
         assertEquals(original, readBack);

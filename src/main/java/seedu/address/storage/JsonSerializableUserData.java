@@ -13,13 +13,13 @@ import seedu.address.model.user.UserData;
  */
 @JsonRootName(value = "userdata")
 class JsonSerializableUserData {
-    private final JsonAdaptedPerson user;
+    private final JsonAdaptedUser user;
 
     /**
      * Constructs a {@code JsonSerializableUserData} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableUserData(@JsonProperty("user") JsonAdaptedPerson user) {
+    public JsonSerializableUserData(@JsonProperty("user") JsonAdaptedUser user) {
         this.user = user;
     }
 
@@ -29,7 +29,7 @@ class JsonSerializableUserData {
      * @param source future changes to this will not affect the created {@code JsonSerializableUserData}.
      */
     public JsonSerializableUserData(ReadOnlyUserData source) {
-        user = new JsonAdaptedPerson(source.getUser());
+        user = new JsonAdaptedUser(source.getUser());
     }
 
     /**

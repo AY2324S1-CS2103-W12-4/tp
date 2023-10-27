@@ -2,8 +2,8 @@ package seedu.address.logic.commands.edit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_USER_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_USER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -18,19 +18,19 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.person.Person;
+import seedu.address.model.user.User;
 import seedu.address.model.user.UserData;
 import seedu.address.model.user.UserPrefs;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.EditUserDescriptorBuilder;
+import seedu.address.testutil.UserBuilder;
 
 public class EditUserCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UserData());
 
     @Test
     public void execute_allFieldsSpecified_success() {
-        Person newUser = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(newUser).build();
+        User newUser = new UserBuilder().build();
+        EditUserDescriptor descriptor = new EditUserDescriptorBuilder(newUser).build();
         EditUserCommand editUserCommand = new EditUserCommand(descriptor);
 
         String expectedMessage = String.format(EditUserCommand.MESSAGE_EDIT_USER_SUCCESS, Messages.format(newUser));
@@ -44,9 +44,9 @@ public class EditUserCommandTest {
 
     @Test
     public void execute_someFieldsSpecified_success() {
-        Person newUser = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        User newUser = new UserBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(newUser).withName(VALID_NAME_BOB)
+        EditUserDescriptor descriptor = new EditUserDescriptorBuilder(newUser).withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditUserCommand editUserCommand = new EditUserCommand(descriptor);
 
@@ -61,8 +61,8 @@ public class EditUserCommandTest {
 
     @Test
     public void execute_duplicateUser_failure() {
-        Person user = model.getUser();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(user).build();
+        User user = model.getUser();
+        EditUserDescriptor descriptor = new EditUserDescriptorBuilder(user).build();
         EditUserCommand editUserCommand = new EditUserCommand(descriptor);
 
         assertCommandFailure(editUserCommand, model, EditUserCommand.MESSAGE_DUPLICATE_USER);
@@ -70,10 +70,10 @@ public class EditUserCommandTest {
 
     @Test
     public void equals() {
-        final EditUserCommand standardCommand = new EditUserCommand(DESC_AMY);
+        final EditUserCommand standardCommand = new EditUserCommand(DESC_USER_AMY);
 
         // same values -> returns true
-        EditPersonDescriptor copyDescriptor = new EditPersonDescriptor(DESC_AMY);
+        EditUserDescriptor copyDescriptor = new EditUserDescriptor(DESC_USER_AMY);
         EditUserCommand commandWithSameValues = new EditUserCommand(copyDescriptor);
         assertEquals(standardCommand, commandWithSameValues);
 
@@ -87,12 +87,12 @@ public class EditUserCommandTest {
         assertNotEquals(standardCommand, new ClearCommand());
 
         // different descriptor -> returns false
-        assertNotEquals(standardCommand, new EditUserCommand(DESC_BOB));
+        assertNotEquals(standardCommand, new EditUserCommand(DESC_USER_BOB));
     }
 
     @Test
     public void toStringMethod_nullEditUserDescriptor() {
-        EditPersonDescriptor editUserDescriptor = new EditPersonDescriptor();
+        EditUserDescriptor editUserDescriptor = new EditUserDescriptor();
         EditUserCommand editUserCommand = new EditUserCommand(editUserDescriptor);
         String expected = EditUserCommand.class.getCanonicalName() + "{" + "editUserDescriptor="
                 + editUserDescriptor + "}";
@@ -101,7 +101,7 @@ public class EditUserCommandTest {
 
     @Test
     public void toStringMethod_filledEditPersonDescriptor() {
-        EditPersonDescriptor editUserDescriptor = DESC_BOB;
+        EditUserDescriptor editUserDescriptor = DESC_USER_AMY;
         EditUserCommand editUserCommand = new EditUserCommand(editUserDescriptor);
         String expected = EditUserCommand.class.getCanonicalName() + "{" + "editUserDescriptor="
                 + editUserDescriptor + "}";

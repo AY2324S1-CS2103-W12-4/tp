@@ -15,6 +15,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.user.ReadOnlyUserData;
 import seedu.address.model.user.ReadOnlyUserPrefs;
+import seedu.address.model.user.User;
 import seedu.address.model.user.UserData;
 import seedu.address.model.user.UserPrefs;
 
@@ -132,12 +133,12 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Person getUser() {
+    public User getUser() {
         return userData.getUser();
     }
 
     @Override
-    public void setUser(Person user) {
+    public void setUser(User user) {
         userData.setUser(user);
     }
 
@@ -170,7 +171,7 @@ public class ModelManager implements Model {
      * {@code userData}
      */
     @Override
-    public ObservableList<Person> getUserView() {
+    public ObservableList<User> getUserView() {
         return userData.getUserView();
     }
 

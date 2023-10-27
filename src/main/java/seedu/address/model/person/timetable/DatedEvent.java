@@ -93,6 +93,20 @@ public class DatedEvent implements Comparable<DatedEvent> {
     }
 
     /**
+     * Returns a format of DateTime that can be stored in a Json File.
+     *
+     * @return Json formatted String.
+     */
+    public String toJsonString() {
+        return "{"
+                + "\"name\": \"" + name + "\","
+                + "\"date\": \"" + date.format(DateTimeFormatter.ofPattern(dateTimeFormatterPattern)) + "\","
+                + "\"timeBlock\": \"" + timeBlock.toString() + "\","
+                + "\"hasReminder\": " + hasReminder
+                + "}";
+    }
+
+    /**
      * Compares this DatedEvent instance with another instance.
      * The comparison is primarily based on the event's date. If the dates are the same,
      * the comparison proceeds to the start time of the associated TimeBlock.

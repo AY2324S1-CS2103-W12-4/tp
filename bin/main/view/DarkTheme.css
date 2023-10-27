@@ -368,3 +368,20 @@
 #userProfilePlaceholder .label {
     -fx-text-fill: white;
 }
+
+.ListView {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-text-fill: #010504;
+}
+
+#selectedFriendPlaceholder .label {
+    -fx-text-fill: white;
+}
+
+.display_small_label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-text-fill: #010504;
+}
+

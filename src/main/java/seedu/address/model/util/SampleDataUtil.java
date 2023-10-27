@@ -1,5 +1,6 @@
 package seedu.address.model.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,9 +12,12 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+
 import seedu.address.model.person.timetable.TimeBlock;
+
 import seedu.address.model.tag.Tag;
 import seedu.address.model.user.ReadOnlyUserData;
+import seedu.address.model.user.User;
 import seedu.address.model.user.UserData;
 
 /**
@@ -49,10 +53,12 @@ public class SampleDataUtil {
         };
     }
 
-    public static Person getSampleUser() {
-        return new Person(new Name("Me"), new Phone("00000000"), new Email("me@example.com"),
+    public static User getSampleUser() {
+        return new User(new Name("Me"), new Phone("00000000"), new Email("me@example.com"),
             new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
+
             getTimeBlockSet("Monday 1200 1300"), getTagSet("me"));
+
     }
     public static ReadOnlyUserData getSampleUserData() {
         return new UserData(getSampleUser());

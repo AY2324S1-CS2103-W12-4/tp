@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -19,11 +20,12 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.timetable.DatedEvent;
 import seedu.address.model.person.timetable.FreeTime;
 import seedu.address.model.person.timetable.TimeBlock;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.user.User;
 
 
 /**
@@ -52,22 +54,22 @@ public class EditUserCommand extends Command {
 
     public static final String MESSAGE_DUPLICATE_USER = "No changes to user.";
 
-    private final EditPersonDescriptor editUserDescriptor;
+    private final EditUserDescriptor editUserDescriptor;
 
     /**
      * @param editUserDescriptor details to edit the user with
      */
-    public EditUserCommand(EditPersonDescriptor editUserDescriptor) {
+    public EditUserCommand(EditUserDescriptor editUserDescriptor) {
         requireNonNull(editUserDescriptor);
 
-        this.editUserDescriptor = new EditPersonDescriptor(editUserDescriptor);
+        this.editUserDescriptor = new EditUserDescriptor(editUserDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Person userToEdit = model.getUser();
-        Person editedUser = createEditedUser(userToEdit, editUserDescriptor);
+        User userToEdit = model.getUser();
+        User editedUser = createEditedUser(userToEdit, editUserDescriptor);
 
         if (userToEdit.equals(editedUser)) {
             throw new CommandException(MESSAGE_DUPLICATE_USER);
@@ -81,7 +83,7 @@ public class EditUserCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code userToEdit}
      * edited with {@code editUserDescriptor}.
      */
-    private static Person createEditedUser(Person userToEdit, EditPersonDescriptor editUserDescriptor) {
+    private static User createEditedUser(User userToEdit, EditUserDescriptor editUserDescriptor) {
         assert userToEdit != null;
         Name updatedName = editUserDescriptor.getName().orElse(userToEdit.getName());
         Phone updatedPhone = editUserDescriptor.getPhone().orElse(userToEdit.getPhone());
@@ -89,7 +91,10 @@ public class EditUserCommand extends Command {
         Address updatedAddress = editUserDescriptor.getAddress().orElse(userToEdit.getAddress());
         Set<TimeBlock> updatedFreeTimes = editUserDescriptor.getTimeBlocks().orElse(userToEdit.getTimeblocks());
         Set<Tag> updatedTags = editUserDescriptor.getTags().orElse(userToEdit.getTags());
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedFreeTimes, updatedTags);
+        ArrayList<DatedEvent> updatedDatedEvents = editUserDescriptor.getDatedEvents()
+                .orElse(userToEdit.getDatedEvents());
+        return new User(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedFreeTimes, updatedTags, updatedDatedEvents);
     }
 
     @Override

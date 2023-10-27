@@ -36,15 +36,15 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.edit.EditPersonDescriptor;
 import seedu.address.logic.commands.edit.EditUserCommand;
+import seedu.address.logic.commands.edit.EditUserDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.timetable.FreeTime;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditUserDescriptorBuilder;
 
 public class EditUserCommandParserTest {
 
@@ -101,7 +101,7 @@ public class EditUserCommandParserTest {
         String userInput = PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND + FREETIME_DESC_MONDAY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        EditUserDescriptor descriptor = new EditUserDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withFreeTimes(VALID_FREETIME_MONDAY).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditUserCommand expectedCommand = new EditUserCommand(descriptor);
@@ -113,7 +113,7 @@ public class EditUserCommandParserTest {
     public void parse_someFieldsSpecified_success() {
         String userInput = PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
+        EditUserDescriptor descriptor = new EditUserDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_AMY).build();
         EditUserCommand expectedCommand = new EditUserCommand(descriptor);
 
@@ -123,37 +123,37 @@ public class EditUserCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         String userInput = NAME_DESC_AMY;
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        EditUserDescriptor descriptor = new EditUserDescriptorBuilder().withName(VALID_NAME_AMY).build();
         EditUserCommand expectedCommand = new EditUserCommand(descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
         userInput = PHONE_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
+        descriptor = new EditUserDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
         expectedCommand = new EditUserCommand(descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
         userInput = EMAIL_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
+        descriptor = new EditUserDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
         expectedCommand = new EditUserCommand(descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
         userInput = ADDRESS_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
+        descriptor = new EditUserDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
         expectedCommand = new EditUserCommand(descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // freetime
         userInput = FREETIME_DESC_MONDAY;
-        descriptor = new EditPersonDescriptorBuilder().withFreeTimes(VALID_FREETIME_MONDAY).build();
+        descriptor = new EditUserDescriptorBuilder().withFreeTimes(VALID_FREETIME_MONDAY).build();
         expectedCommand = new EditUserCommand(descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
         userInput = TAG_DESC_FRIEND;
-        descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
+        descriptor = new EditUserDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
         expectedCommand = new EditUserCommand(descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -193,7 +193,7 @@ public class EditUserCommandParserTest {
     public void parse_resetTags_success() {
         String userInput = TAG_EMPTY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
+        EditUserDescriptor descriptor = new EditUserDescriptorBuilder().withTags().build();
         EditUserCommand expectedCommand = new EditUserCommand(descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -203,7 +203,7 @@ public class EditUserCommandParserTest {
     public void parse_resetFreeTimes_success() {
         String userInput = FREETIME_EMPTY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withFreeTimes()
+        EditUserDescriptor descriptor = new EditUserDescriptorBuilder().withFreeTimes()
                 .build();
         EditUserCommand expectedCommand = new EditUserCommand(descriptor);
 

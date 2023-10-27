@@ -2,22 +2,27 @@ package seedu.address.model.user;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.timetable.DatedEvent;
 
 /**
  * Represents a User in the address book.
  */
 public class UserData implements ReadOnlyUserData {
 
-    private Person user = new Person();
+    private User user = new User();
+    private final ObservableList<User> internalList = FXCollections.observableArrayList();
+    private final ObservableList<User> internalUnmodifiableList =
+            FXCollections.unmodifiableObservableList(internalList);
+
 
     public UserData() {};
 
-    public UserData(Person user) {
+    public UserData(User user) {
         this.user = user;
     }
 
@@ -25,8 +30,12 @@ public class UserData implements ReadOnlyUserData {
         this(userData.getUser());
     }
 
-    public void setUser(Person user) {
+    public void setUser(User user) {
         this.user = user;
+    }
+
+    public void setDatedEvents(ArrayList<DatedEvent> datedEvents) {
+        this.user.setDatedEvents(datedEvents);
     }
 
     /**
@@ -36,17 +45,21 @@ public class UserData implements ReadOnlyUserData {
     public void resetData(ReadOnlyUserData newData) {
         requireNonNull(newData);
         this.setUser(newData.getUser());
+        this.setDatedEvents(newData.getDatedEvents());
     }
 
-    public ObservableList<Person> getUserView() {
-        UniquePersonList userView = new UniquePersonList();
-        userView.add(user);
-        return userView.asUnmodifiableObservableList();
+    public ObservableList<User> getUserView() {
+        return internalUnmodifiableList;
     }
 
     @Override
-    public Person getUser() {
+    public User getUser() {
         return user;
+    }
+
+    @Override
+    public ArrayList<DatedEvent> getDatedEvents() {
+        return user.getDatedEvents();
     }
 
     @Override

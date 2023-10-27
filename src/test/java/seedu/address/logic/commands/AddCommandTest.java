@@ -25,6 +25,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.user.ReadOnlyUserData;
 import seedu.address.model.user.ReadOnlyUserPrefs;
+import seedu.address.model.user.User;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -171,17 +172,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public Person getUser() {
+        public User getUser() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setUser(Person user) {
+        public void setUser(User user) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Person> getUserView() {
+        public ObservableList<User> getUserView() {
             throw new UnsupportedOperationException("This method should not be called.");
         }
 

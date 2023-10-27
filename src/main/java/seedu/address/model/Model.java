@@ -9,6 +9,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.user.ReadOnlyUserData;
 import seedu.address.model.user.ReadOnlyUserPrefs;
+import seedu.address.model.user.User;
 
 /**
  * The API of the Model component.
@@ -70,13 +71,13 @@ public interface Model {
     /**
      * Returns the user.
      */
-    Person getUser();
+    User getUser();
 
     /**
      * Sets the user.
      * @param user
      */
-    void setUser(Person user);
+    void setUser(User user);
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -106,7 +107,7 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the user */
-    ObservableList<Person> getUserView();
+    ObservableList<User> getUserView();
 
     /**
      * Returns the person in the address book with the given name.
